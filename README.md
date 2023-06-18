@@ -40,7 +40,7 @@ Multimodal brain tumor segmentaiton with missing modality
 
 We would like to extend our gratitude to the following individuals for their contributions to this project:
 
-- [D3Dnet]([https://github.com/contributor1](https://github.com/XinyiYing/D3Dnet)): Thank you for your valuable code contributions and insights.
+- [D3Dnet](https://github.com/XinyiYing/D3Dnet): Thank you for your valuable code contributions and insights.
 
 We are grateful to the open-source community for their continuous support and the collaborative spirit that drives innovation.
 
