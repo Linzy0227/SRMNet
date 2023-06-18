@@ -1,6 +1,7 @@
 # SRMNet
 Multimodal brain tumor segmentaiton with missing modality
 
+We will update the complete code after the paper is accepted!!!
 
 ## Dice score (%) on the BraTS2020 dataset
 
