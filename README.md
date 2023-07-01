@@ -37,6 +37,4 @@ We would like to extend our gratitude to the following individuals for their con
 
 - [D3Dnet](https://github.com/XinyiYing/D3Dnet): Thank you for your valuable code contributions and insights.
 
-We are grateful to the open-source community for their continuous support and the collaborative spirit that drives innovation.
-
 
