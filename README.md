@@ -12,7 +12,7 @@ We will update the complete code after the paper is accepted!!!
 ## Architecture of the proposed framework
 
 
-![img1](images/image1.jpg)
+![img1](imgs/img1.png)
 
 ## Environment
 
