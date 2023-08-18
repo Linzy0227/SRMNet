@@ -1,5 +1,5 @@
 # SRMNet
-Multimodal brain tumor segmentaiton with missing modality
+Deformation-Aware and Reconstruction-Driven Multimodal Representation Learning for Brain Tumor Segmentation with Missing Modalities
 
 We will update the complete code after the paper is accepted!!!
 
@@ -12,13 +12,13 @@ We will update the complete code after the paper is accepted!!!
 ## Architecture of the proposed framework
 
 
-![img1](imgs/img1.png)
+![img1](imgs/main.png)
 
 ## Environment
 
 
-- Python 3.9+
-- Torch 2.0+
+- Python 3.9
+- Torch 1.12+
 - cuda_11.6
 - ...
 
@@ -33,7 +33,7 @@ We will update the complete code after the paper is accepted!!!
    
 ## Acknowledgments
 
-We would like to extend our gratitude to the following individuals for their contributions to this project:
+We would like to extend our gratitude to the following project:
 
 - [D3Dnet](https://github.com/XinyiYing/D3Dnet): Thank you for your valuable code contributions and insights.
 
