@@ -2,11 +2,6 @@
 
 We will update the complete code after the paper is accepted!!!
 
-## Dice score (%) on the BraTS2020 dataset
-
-|    ET   |    WT   |    TC   |
-|---------|---------|---------|
-|   63.5  |   87.0  |   79.3  |
 
 ## Architecture of the proposed framework
 
