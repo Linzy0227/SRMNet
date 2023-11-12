@@ -37,8 +37,7 @@ Download our trained model weights: [model_last.pth](https://drive.google.com/fi
 ## Acknowledgments
 
 We would like to extend our gratitude to the following project:
-- [RFNet](https://github.com/dyh127/RFNet)
 
-- [D3Dnet](https://github.com/XinyiYing/D3Dnet): Thank you for your valuable code contributions and insights.
+- [D3Dnet](https://github.com/XinyiYing/D3Dnet)
 
 
