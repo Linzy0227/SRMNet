@@ -6,7 +6,7 @@ We will update the complete code after the paper is accepted!!!
 
 |    ET   |    WT   |    TC   |
 |---------|---------|---------|
-|   62.2  |   87.0  |   79.2  |
+|   63.5  |   87.0  |   79.3  |
 
 ## Architecture of the proposed framework
 
@@ -21,6 +21,10 @@ We will update the complete code after the paper is accepted!!!
 - cuda_11.6
 - ...
 
+## Model Weights
+
+Download our trained model weights: [model_last.pth](https://drive.google.com/file/d/17sMQKkh7JBhPiNAzRe6roGhPoyZVn6-J/view?usp=drive_link)
+
 ## Installation
 
 
@@ -33,6 +37,7 @@ We will update the complete code after the paper is accepted!!!
 ## Acknowledgments
 
 We would like to extend our gratitude to the following project:
+- [RFNet](https://github.com/dyh127/RFNet)
 
 - [D3Dnet](https://github.com/XinyiYing/D3Dnet): Thank you for your valuable code contributions and insights.
 
