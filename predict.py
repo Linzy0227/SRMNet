@@ -7,21 +7,17 @@ import torch.nn.functional as F
 import torch.backends.cudnn as cudnn
 import numpy as np
 import nibabel as nib
-import scipy.misc
 
 cudnn.benchmark = True
 
 path = os.path.dirname(__file__)
-from utils.generate import generate_snapshot
 
 patch_size = 128
-
 save_format = 'nii'
 snapshot = False
 
 def softmax_output_dice_class4(output, target):
     eps = 1e-8
-    #######label1########
     o1 = (output == 1).float()
     t1 = (target == 1).float()
     intersect1 = torch.sum(2 * (o1 * t1), dim=(1,2,3)) + eps
@@ -40,7 +36,6 @@ def softmax_output_dice_class4(output, target):
     denominator3 = torch.sum(o3, dim=(1,2,3)) + torch.sum(t3, dim=(1,2,3)) + eps
     enhancing_dice = intersect3 / denominator3
 
-    ####post processing:
     if torch.sum(o3) < 500:
        o4 = o3 * 0.0
     else:
@@ -67,60 +62,6 @@ def softmax_output_dice_class4(output, target):
 
     return dice_separate.cpu().numpy(), dice_evaluate.cpu().numpy()
 
-def softmax_output_dice_class5(output, target):
-    eps = 1e-8
-    #######label1########
-    o1 = (output == 1).float()
-    t1 = (target == 1).float()
-    intersect1 = torch.sum(2 * (o1 * t1), dim=(1,2,3)) + eps
-    denominator1 = torch.sum(o1, dim=(1,2,3)) + torch.sum(t1, dim=(1,2,3)) + eps
-    necrosis_dice = intersect1 / denominator1
-
-    o2 = (output == 2).float()
-    t2 = (target == 2).float()
-    intersect2 = torch.sum(2 * (o2 * t2), dim=(1,2,3)) + eps
-    denominator2 = torch.sum(o2, dim=(1,2,3)) + torch.sum(t2, dim=(1,2,3)) + eps
-    edema_dice = intersect2 / denominator2
-
-    o3 = (output == 3).float()
-    t3 = (target == 3).float()
-    intersect3 = torch.sum(2 * (o3 * t3), dim=(1,2,3)) + eps
-    denominator3 = torch.sum(o3, dim=(1,2,3)) + torch.sum(t3, dim=(1,2,3)) + eps
-    non_enhancing_dice = intersect3 / denominator3
-
-    o4 = (output == 4).float()
-    t4 = (target == 4).float()
-    intersect4 = torch.sum(2 * (o4 * t4), dim=(1,2,3)) + eps
-    denominator4 = torch.sum(o4, dim=(1,2,3)) + torch.sum(t4, dim=(1,2,3)) + eps
-    enhancing_dice = intersect4 / denominator4
-
-    ####post processing:
-    if torch.sum(o4) < 500:
-        o5 = o4 * 0
-    else:
-        o5 = o4
-    t5 = t4
-    intersect5 = torch.sum(2 * (o5 * t5), dim=(1,2,3)) + eps
-    denominator5 = torch.sum(o5, dim=(1,2,3)) + torch.sum(t5, dim=(1,2,3)) + eps
-    enhancing_dice_postpro = intersect5 / denominator5
-
-    o_whole = o1 + o2 + o3 + o4
-    t_whole = t1 + t2 + t3 + t4
-    intersect_whole = torch.sum(2 * (o_whole * t_whole), dim=(1,2,3)) + eps
-    denominator_whole = torch.sum(o_whole, dim=(1,2,3)) + torch.sum(t_whole, dim=(1,2,3)) + eps
-    dice_whole = intersect_whole / denominator_whole
-
-    o_core = o1 + o3 + o4
-    t_core = t1 + t3 + t4
-    intersect_core = torch.sum(2 * (o_core * t_core), dim=(1,2,3)) + eps
-    denominator_core = torch.sum(o_core, dim=(1,2,3)) + torch.sum(t_core, dim=(1,2,3)) + eps
-    dice_core = intersect_core / denominator_core
-
-    dice_separate = torch.cat((torch.unsqueeze(necrosis_dice, 1), torch.unsqueeze(edema_dice, 1), torch.unsqueeze(non_enhancing_dice, 1), torch.unsqueeze(enhancing_dice, 1)), dim=1)
-    dice_evaluate = torch.cat((torch.unsqueeze(dice_whole, 1), torch.unsqueeze(dice_core, 1), torch.unsqueeze(enhancing_dice, 1), torch.unsqueeze(enhancing_dice_postpro, 1)), dim=1)
-
-    return dice_separate.cpu().numpy(), dice_evaluate.cpu().numpy()
-
 
 def test_softmax(
         test_loader,
@@ -135,7 +76,6 @@ def test_softmax(
     vals_evaluation = AverageMeter()
     vals_separate = AverageMeter()
     one_tensor = torch.ones(1, patch_size, patch_size, patch_size).float().cuda()
-    # os.makedirs(savepath, exist_ok=True)
 
     if dataname in ['BRATS2021', 'BRATS2020', 'BRATS2018']:
         num_cls = 4
@@ -146,13 +86,10 @@ def test_softmax(
         class_evaluation= 'whole', 'core', 'enhancing', 'enhancing_postpro'
         class_separate = 'necrosis', 'edema', 'non_enhancing', 'enhancing'
         
-
     for i, data in enumerate(test_loader):
         target = data[1].cuda()
         x = data[0].cuda()
-        # print(i+1,x.shape,target.shape)
         names = data[-1]
-        # print(names)
         if feature_mask is not None:
             mask = torch.from_numpy(np.array(feature_mask))
             mask = torch.unsqueeze(mask, dim=0).repeat(len(names), 1)
@@ -202,13 +139,10 @@ def test_softmax(
         if savepath:
             pred1 = temp[0, :, :H, :W, :T].cpu().detach().numpy()
             pred1 = pred1.argmax(0)
-            # .npy for further model ensemble
-            # .nii for directly model submission
             assert save_format in ['npy', 'nii']
             if save_format == 'npy':
                 np.save(os.path.join(savepath, names[0] + mask_name + '_preds'), pred1)
             if save_format == 'nii':
-                # raise NotImplementedError
                 if not os.path.exists(os.path.join(savepath, "summit")):
                     os.makedirs(os.path.join(savepath, "summit"))
                 oname = os.path.join(savepath, "summit", names[0] + mask_name + '.nii.gz')
@@ -219,7 +153,6 @@ def test_softmax(
                 seg_img[np.where(pred1 == 3)] = 4
 
                 nib.save(nib.Nifti1Image(seg_img, None), oname)
-                # print('Successfully save {}'.format(oname))
 
                 if snapshot:
                     """ --- colorful figure--- """
@@ -233,11 +166,8 @@ def test_softmax(
                             os.makedirs(os.path.join(savepath, "visual", names[0]+mask_name))
                         imageio.imwrite(os.path.join(savepath, "visual", names[0]+mask_name, str(frame)+'.png'), Snapshot_img[:, :, :, frame])
 
-
         if dataname in ['BRATS2021', 'BRATS2020', 'BRATS2018']:
             scores_separate, scores_evaluation = softmax_output_dice_class4(pred, target)
-        elif dataname == 'BRATS2015':
-            scores_separate, scores_evaluation = softmax_output_dice_class5(pred, target)
         for k, name in enumerate(names):
             msg = 'Subject {}/{}, {}/{}'.format((i+1), len(test_loader), (k+1), len(names))
             msg += '{:>20}, '.format(name)
@@ -245,12 +175,10 @@ def test_softmax(
             vals_separate.update(scores_separate[k])
             vals_evaluation.update(scores_evaluation[k])
             msg += ', '.join(['{}: {:.4f}'.format(k, v) for k, v in zip(class_evaluation, scores_evaluation[k])])
-            #msg += ',' + ', '.join(['{}: {:.4f}'.format(k, v) for k, v in zip(class_separate, scores_separate[k])])
 
             logging.info(msg)
     msg = 'Average scores:'
     msg += ', '.join(['{}: {:.4f}'.format(k, v) for k, v in zip(class_evaluation, vals_evaluation.avg)])
-    #msg += ',' + ', '.join(['{}: {:.4f}'.format(k, v) for k, v in zip(class_separate, vals_evaluation.avg)])
     print (msg)
     model.train()
     return vals_evaluation.avg
