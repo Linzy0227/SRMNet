@@ -2,8 +2,8 @@ import os
 import numpy as np
 import medpy.io as medio
 
-src_path = '/home/l/data_1/lzy/BraTSDataset/BraTS2020/MICCAI_BraTS2020_TrainingData'
-tar_path = '/home/l/data_1/lzy/BraTS/BraTS20/Train_npy'
+src_path = 'xxx/MICCAI_BraTS2020_TrainingData'
+tar_path = 'xxx/BraTS20/Train_npy'
 
 name_list = os.listdir(src_path)
 
