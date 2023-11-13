@@ -28,8 +28,10 @@ python test.py
 
 ## Model Weights
 We have retrained our model on an NVIDIA RTX 4090. You can download it if needed.
-Wright: -[Weight-BraTS2020](https://drive.google.com/file/d/17sMQKkh7JBhPiNAzRe6roGhPoyZVn6-J/view?usp=drive_link)
-Log: -[Log-BraTS2020](https://drive.google.com/file/d/1nxxBknNQlGd4FdZE7GYKGfYwqhcrJhDf/view?usp=drive_link)
+
+Weight: [Weight-BraTS2020](https://drive.google.com/file/d/17sMQKkh7JBhPiNAzRe6roGhPoyZVn6-J/view?usp=drive_link)
+
+Log: [Log-BraTS2020](https://drive.google.com/file/d/1nxxBknNQlGd4FdZE7GYKGfYwqhcrJhDf/view?usp=drive_link)
 
 ## Installation
 1. Clone the repository:
