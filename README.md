@@ -10,18 +10,21 @@
 ## Data Processing Steps
 
 ### Step 1: Data Preprocessing
-  ```shell
+  ```bash
     python preprocess.py
+```
 
 ### Step 2: Compile DCN
-  ```shell
+  ```bash
   cd dcn
   bash make.sh
+```
 
 ## Train and Test
-```shell
+```bash
 python train.py
 python test.py
+```
 
 ## Model Weights
 We have retrained our model on an NVIDIA RTX 4090. You can download it if needed.
@@ -30,8 +33,9 @@ Log: -[Log-BraTS2020](https://drive.google.com/file/d/1nxxBknNQlGd4FdZE7GYKGfYwq
 
 ## Installation
 1. Clone the repository:
-   ```shell
+   ```bash
    git clone https://github.com/linda0227/SRMNet.git
+   ```
    
    
 ## Acknowledgments
