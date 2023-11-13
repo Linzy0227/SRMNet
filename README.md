@@ -10,8 +10,9 @@
 ## Data Processing Steps
 
 ### Step 1: Data Preprocessing
-- **Script**: `preprocess.py`
-
+  ```bash
+    python preprocess.py
+```
   python preprocess.py
 ### Step 2: Compile DCN
   ```bash
@@ -22,7 +23,7 @@
 
 ## Model Weights
 
-Download our trained model weights: [model_last.pth](https://drive.google.com/file/d/17sMQKkh7JBhPiNAzRe6roGhPoyZVn6-J/view?usp=drive_link)
+We have retrained our model on an NVIDIA RTX 4090. You can download it if needed. [model_last.pth](https://drive.google.com/file/d/17sMQKkh7JBhPiNAzRe6roGhPoyZVn6-J/view?usp=drive_link)
 
 ## Installation
 
