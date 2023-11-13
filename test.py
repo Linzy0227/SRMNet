@@ -11,12 +11,12 @@ from utils.lr_scheduler import LR_Scheduler, record_loss, MultiEpochsDataLoader
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--user', default='user of name', type=str)
-parser.add_argument('--gpu', default='1', type=str)
+parser.add_argument('--user', default='name of user', type=str) 
+parser.add_argument('--gpu', default='0', type=str)
 parser.add_argument('--dataname', default='BRATS2020', type=str)
-parser.add_argument('--resume', default='path of checkpoint', type=str)
-parser.add_argument('--datapath', default='path of datasets', type=str)
-parser.add_argument('--savepath', default='BrsTS20VisualFloder', type=str)
+parser.add_argument('--resume', default='BraTS2020/split/model_last.pth', type=str)
+parser.add_argument('--datapath', default='/home/oem/data/dataset/BraTS-npy/BraTS20', type=str)
+parser.add_argument('--savepath', default='BrsTS2020_img/', type=str)
 
 args = parser.parse_args()
 
@@ -34,13 +34,8 @@ if __name__ == '__main__':
                  'flairt1cet1', 'flairt1t2', 'flairt1cet2', 't1cet1t2',
                  'flairt1cet1t2']
 
-    if args.dataname in ['BRATS2020', 'BRATS2015']:
-        train_file = 'train.txt'
-        test_file = 'test.txt'
-    elif args.dataname == 'BRATS2018':
-        ####BRATS2018 contains three splits (1,2,3)
-        train_file = 'train2.txt'
-        test_file = 'test2.txt'
+    train_file = 'train.txt'
+    test_file = 'test.txt'
 
     test_transforms = 'Compose([NumpyType((np.float32, np.int64)),])'
     num_cls = 4
@@ -56,7 +51,7 @@ if __name__ == '__main__':
 
     test_score = AverageMeter()
     with torch.no_grad():
-        print('###########test set wi/wo postprocess###########')
+        print('###########test postprocess###########')
         for i, mask in enumerate(masks):
             print('{}'.format(mask_name[i]))
             mask_n = mask_name[i]
