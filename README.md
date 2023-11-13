@@ -1,20 +1,21 @@
 # Deformation-Aware and Reconstruction-Driven Multimodal Representation Learning for Brain Tumor Segmentation with Missing Modalities
 
-We will update the complete code after the paper is accepted!!!
-
-
-## Architecture of the proposed framework
-
-
-![img1](imgs/main.png)
 
 ## Environment
 
-
 - Python 3.9
-- Torch 1.12+
+- Torch 1.12.1
 - cuda_11.6
-- ...
+
+## Data Processing Steps
+
+### Step 1: Data Preprocessing
+- **Script**: `preprocess.py`
+- **Description**: This script performs the initial data preparation and processing. It typically includes data cleaning, normalization, feature extraction, and other necessary manipulations.
+- **How to Run**:
+  ```bash
+  python preprocess.py
+
 
 ## Model Weights
 
