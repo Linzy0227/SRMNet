@@ -17,6 +17,7 @@
   ```bash
   cd dcn
   bash make.sh
+```
 
 
 ## Model Weights
