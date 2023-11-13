@@ -11,10 +11,12 @@
 
 ### Step 1: Data Preprocessing
 - **Script**: `preprocess.py`
-- **Description**: This script performs the initial data preparation and processing. It typically includes data cleaning, normalization, feature extraction, and other necessary manipulations.
-- **How to Run**:
   ```bash
   python preprocess.py
+### Step 2: Compile DCN
+  ```bash
+  cd dcn
+  bash make.sh
 
 
 ## Model Weights
