@@ -11,7 +11,7 @@
 
 ### Step 1: Data Preprocessing
 - **Script**: `preprocess.py`
-  ```bash
+
   python preprocess.py
 ### Step 2: Compile DCN
   ```bash
