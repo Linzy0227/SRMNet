@@ -1,6 +1,3 @@
-# Deformation-Aware and Reconstruction-Driven Multimodal Representation Learning for Brain Tumor Segmentation with Missing Modalities
-
-
 ## Environment
 
 - Python 3.9
